@@ -1,0 +1,5 @@
+2026/10/22-06:31:19.539 1c10 Creating DB c:\Users\Anaxagoras\.gemini\antigravity\scratch\limbahApp-gforms\storage\edge_profile\Default\EdgeCoupons/coupons_data.db since it was missing.
+2026/10/22-06:31:19.570 1c10 Reusing MANIFEST c:\Users\Anaxagoras\.gemini\antigravity\scratch\limbahApp-gforms\storage\edge_profile\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/10/22-06:31:19.872 9a54 Level-0 table #5: started
+2026/10/22-06:31:19.877 9a54 Level-0 table #5: 683273 bytes OK
+2026/10/22-06:31:19.880 9a54 Delete type=0 #3
