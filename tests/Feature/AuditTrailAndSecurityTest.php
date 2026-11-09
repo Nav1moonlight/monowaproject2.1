@@ -172,7 +172,7 @@ class AuditTrailAndSecurityTest extends TestCase
         Sanctum::actingAs($operator);
         $category = WasteCategory::first() ?? WasteCategory::factory()->create();
 
-        $photo1 = UploadedFile::fake()->image('scale1.jpg');
+        $photo1 = UploadedFile::fake()->create('scale1.jpg', 100, 'image/jpeg');
 
         $createResponse = $this->postJson('/api/b3-transactions', [
             'transaction_type' => 'IN',
@@ -196,7 +196,7 @@ class AuditTrailAndSecurityTest extends TestCase
         $oldPath = $tx->scale_photo_path;
 
         // Replace with scale2.jpg
-        $photo2 = UploadedFile::fake()->image('scale2.jpg');
+        $photo2 = UploadedFile::fake()->create('scale2.jpg', 100, 'image/jpeg');
         $updateResponse = $this->putJson("/api/b3-transactions/{$txId}", [
             'scale_photo' => $photo2,
         ]);

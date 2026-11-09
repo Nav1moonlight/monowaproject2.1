@@ -8,6 +8,7 @@ use App\Models\Notification;
 use App\Models\StorageAlert;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class DashboardService
 {
@@ -190,9 +191,12 @@ class DashboardService
             $startDate = $year ? Carbon::create($year, 1, 1)->startOfDay() : now()->subMonths($months - 1)->startOfMonth()->startOfDay();
             $endDate = $year ? Carbon::create($year, 12, 31)->endOfDay() : now()->endOfMonth()->endOfDay();
 
+            $isSqlite = DB::connection()->getDriverName() === 'sqlite';
+            $dateGroupExpr = $isSqlite ? "strftime('%Y-%m', date)" : "DATE_FORMAT(date, '%Y-%m')";
+
             // Query B3 transactions grouped by YYYY-MM
             $b3Stats = B3Transaction::selectRaw("
-                    DATE_FORMAT(date, '%Y-%m') as ym,
+                    {$dateGroupExpr} as ym,
                     SUM(CASE WHEN transaction_type = 'IN' THEN weight_kg ELSE 0 END) as in_weight,
                     SUM(CASE WHEN transaction_type = 'OUT' THEN weight_kg ELSE 0 END) as out_weight
                 ")
@@ -203,7 +207,7 @@ class DashboardService
 
             // Query Domestic transactions grouped by YYYY-MM
             $domStats = DomesticTransaction::selectRaw("
-                    DATE_FORMAT(date, '%Y-%m') as ym,
+                    {$dateGroupExpr} as ym,
                     SUM(organic_weight_kg) as organic_weight,
                     SUM(inorganic_weight_kg) as inorganic_weight,
                     SUM(total_weight_kg) as total_weight
@@ -298,9 +302,12 @@ class DashboardService
             $startDate = Carbon::create($startYear, 1, 1)->startOfDay();
             $endDate = Carbon::create($currentYear, 12, 31)->endOfDay();
 
+            $isSqlite = DB::connection()->getDriverName() === 'sqlite';
+            $dateGroupExpr = $isSqlite ? "strftime('%Y', date)" : "DATE_FORMAT(date, '%Y')";
+
             // Query B3 transactions grouped by year
             $b3Stats = B3Transaction::selectRaw("
-                    DATE_FORMAT(date, '%Y') as yr,
+                    {$dateGroupExpr} as yr,
                     SUM(CASE WHEN transaction_type = 'IN' THEN weight_kg ELSE 0 END) as in_weight,
                     SUM(CASE WHEN transaction_type = 'OUT' THEN weight_kg ELSE 0 END) as out_weight
                 ")
@@ -311,7 +318,7 @@ class DashboardService
 
             // Query Domestic transactions grouped by year
             $domStats = DomesticTransaction::selectRaw("
-                    DATE_FORMAT(date, '%Y') as yr,
+                    {$dateGroupExpr} as yr,
                     SUM(organic_weight_kg) as organic_weight,
                     SUM(inorganic_weight_kg) as inorganic_weight,
                     SUM(total_weight_kg) as total_weight,

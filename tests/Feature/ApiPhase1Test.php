@@ -107,7 +107,7 @@ class ApiPhase1Test extends TestCase
     {
         Storage::fake('public');
         $category = WasteCategory::first();
-        $file = UploadedFile::fake()->image('scale.jpg');
+        $file = UploadedFile::fake()->create('scale.jpg', 100, 'image/jpeg');
 
         $payload = [
             'transaction_type' => 'IN',

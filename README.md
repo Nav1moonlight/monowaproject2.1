@@ -2,6 +2,20 @@
 
 Sistem pemantauan dan pengelolaan limbah fasilitas (B3 & Domestik) dengan dashboard real-time yang dibangun menggunakan **Laravel 11 + React 19 + Tailwind CSS v4**. Sistem ini mengintegrasikan frontend React dengan REST API Laravel & Database MySQL secara terpusat.
 
+---
+
+## 📚 Dokumentasi Proyek
+
+Telah disediakan dokumentasi teknis dan panduan komprehensif dalam direktori [`docs/`](docs/):
+
+1. 🏛️ **[Arsitektur Sistem (SYSTEM_ARCHITECTURE.md)](docs/SYSTEM_ARCHITECTURE.md)**: Arsitektur aplikasi, diagram alir komponen, ERD database, mesin kepatuhan regulasi (compliance engine), dan RBAC matrix.
+2. 🔌 **[Dokumentasi REST API (API_DOCUMENTATION.md)](docs/API_DOCUMENTATION.md)**: Spesifikasi endpoint RESTful, format request/response, autentikasi Sanctum, dan kode status.
+3. 📖 **[Panduan Pengguna / User Manual (USER_MANUAL.md)](docs/USER_MANUAL.md)**: Panduan operasional penimbangan B3 masuk/keluar, domestik sesi pagi/sore, penanganan alert, dan kustomisasi tema.
+4. 🚀 **[Panduan Deployment Produksi (DEPLOYMENT_GUIDE.md)](docs/DEPLOYMENT_GUIDE.md)**: Panduan instalasi di server produksi Linux Ubuntu/Nginx/MySQL, setup cron scheduler, dan optimasi build.
+5. 📊 **[Slide Presentasi Proyek (PRESENTATION.md)](docs/PRESENTATION.md)**: Naskah dan susunan slide presentasi lengkap untuk stakeholder/manajemen (kompatibel dengan Marp / Slidev / PPTX), dilengkapi speaker notes dan analisis ROI.
+
+---
+
 ## 📋 Requirement
 
 - **PHP** 8.2 atau lebih tinggi (Rekomendasi PHP 8.3+)
